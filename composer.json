@@ -1,0 +1,17 @@
+{
+    "name": "itrvb/lab3",
+    "autoload": {
+        "psr-4": {
+            "Itrvb\\Lab3\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Адлан Шамавов",
+            "email": "a.shamavov@iqdev.digital"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.23"
+    }
+}
