@@ -2,7 +2,7 @@
     "name": "itrvb/lab3",
     "autoload": {
         "psr-4": {
-            "Itrvb\\Lab3\\": "src/"
+            "Itrvb\\Lab4\\": "src/"
         }
     },
     "authors": [
@@ -12,6 +12,9 @@
         }
     ],
     "require": {
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "symfony/uid": "^7.1",
+      "ext-sqlite3": "*",
+      "ext-sqlite": "*"
     }
 }

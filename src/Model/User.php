@@ -1,8 +1,12 @@
 <?php
 
+namespace Itrvb\Lab4\Model;
+
+use Faker\Core\Uuid;
+
 class User
 {
-    public int $id;
+    public Uuid $uuid;
 
     public string $firstName;
 
