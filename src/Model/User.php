@@ -6,7 +6,7 @@ use Faker\Core\Uuid;
 
 class User
 {
-    public Uuid $uuid;
+    public string $uuid;
 
     public string $firstName;
 

@@ -6,11 +6,11 @@ use Faker\Core\Uuid;
 
 class Comment
 {
-    public Uuid $uuid;
+    public string $uuid;
 
-    public Uuid $authorUuid;
+    public string $authorUuid;
 
-    public Uuid $postUuid;
+    public string $postUuid;
 
     public string $text;
 }

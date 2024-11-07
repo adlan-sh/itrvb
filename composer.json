@@ -15,6 +15,7 @@
         "fakerphp/faker": "^1.23",
         "symfony/uid": "^7.1",
       "ext-sqlite3": "*",
-      "ext-sqlite": "*"
+      "ext-sqlite": "*",
+      "ext-pdo": "*"
     }
 }

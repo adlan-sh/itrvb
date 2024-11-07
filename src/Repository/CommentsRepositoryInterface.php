@@ -2,12 +2,11 @@
 
 namespace Itrvb\Lab4\Repository;
 
-use Faker\Core\Uuid;
 use Itrvb\Lab4\Model\Comment;
 
 interface CommentsRepositoryInterface
 {
-    public function get(Uuid $uuid): Comment;
+    public function get(string $uuid): Comment;
 
-    public function save(Comment $post): void;
+    public function save(Comment $comment): void;
 }

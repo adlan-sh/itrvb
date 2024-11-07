@@ -7,7 +7,7 @@ use Itrvb\Lab4\Model\Post;
 
 interface PostsRepositoryInterface
 {
-    public function get(Uuid $uuid): Post;
+    public function get(string $uuid): Post;
 
     public function save(Post $post): void;
 }

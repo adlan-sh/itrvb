@@ -6,9 +6,9 @@ use Faker\Core\Uuid;
 
 class Post
 {
-    public Uuid $uuid;
+    public string $uuid;
 
-    public Uuid $authorUuid;
+    public string $authorUuid;
 
     public string $title;
 
