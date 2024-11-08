@@ -55,3 +55,15 @@ Q.idea/sonarlint/securityhotspotstore/1/7/1703566e41b1bc33bf5902edf604e5e503b6ee
 Q.idea/sonarlint/securityhotspotstore/1/4/145011be6edbb7cae8f267364260f56cabecf26d,4\a\4a6362c18cc82e0403924422132ae921b5d8c7fd
 
 Q.idea/sonarlint/securityhotspotstore/d/4/d4f69acbe61f8c37c042a4720b9f43fbd9dfaa85,0\4\048cddd03ba00e1789b74408b558cc847fa87037
+>
+tests/Test.php,0\5\05849910104af5fb87f8d20ef83d351dd3563137
+M
+tests/PostsRepositoryTest.php,e\f\efb8cec008e7a076043bf0658da6e517f949f411
+W
+'src/Exception/PostNotFoundException.php,1\7\1742ee156423e3a29b1303ae4f9a12a761ac69c3
+P
+ tests/CommentsRepositoryTest.php,0\c\0c8010e4ee3dc7f49af4860b9e8e42b93877e5aa
+Z
+*src/Exception/CommentNotFoundException.php,d\e\dea08f18c4f68cf53b209e4f54e62ccce709b50e
+U
+%src/Repository/CommentsRepository.php,a\4\a41ea812b08b98c2067b7e8dc356263c669cb0ca

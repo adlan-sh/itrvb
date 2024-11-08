@@ -2,6 +2,7 @@
 
 namespace Itrvb\Lab4\Repository;
 
+use Itrvb\Lab4\Exception\CommentNotFoundException;
 use Itrvb\Lab4\Repository\CommentsRepositoryInterface;
 use Itrvb\Lab4\Model\Comment;
 use PDO;
@@ -19,6 +20,11 @@ class CommentsRepository implements CommentsRepositoryInterface
     {
         $sql = "SELECT * FROM comments WHERE `uuid` = '$uuid'";
         $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            throw new CommentNotFoundException();
+        }
+
         $comment = new Comment();
         $comment->uuid = $data['uuid'];
         $comment->authorUuid = $data['authorUuid'];
