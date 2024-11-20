@@ -55,8 +55,6 @@ Q.idea/sonarlint/securityhotspotstore/1/7/1703566e41b1bc33bf5902edf604e5e503b6ee
 Q.idea/sonarlint/securityhotspotstore/1/4/145011be6edbb7cae8f267364260f56cabecf26d,4\a\4a6362c18cc82e0403924422132ae921b5d8c7fd
 Å
 Q.idea/sonarlint/securityhotspotstore/d/4/d4f69acbe61f8c37c042a4720b9f43fbd9dfaa85,0\4\048cddd03ba00e1789b74408b558cc847fa87037
->
-tests/Test.php,0\5\05849910104af5fb87f8d20ef83d351dd3563137
 M
 tests/PostsRepositoryTest.php,e\f\efb8cec008e7a076043bf0658da6e517f949f411
 W
@@ -67,3 +65,11 @@ Z
 *src/Exception/CommentNotFoundException.php,d\e\dea08f18c4f68cf53b209e4f54e62ccce709b50e
 U
 %src/Repository/CommentsRepository.php,a\4\a41ea812b08b98c2067b7e8dc356263c669cb0ca
+O
+src/Command/Post/CreatePost.php,d\9\d90d1c1bde16683f2b2b58f75e58d5eb2e678d74
+U
+%src/Command/Comment/CreateComment.php,a\d\addc5ac0ea28327650bcf8f6313b6d9aecff6630
+Å
+Q.idea/sonarlint/securityhotspotstore/a/d/addc5ac0ea28327650bcf8f6313b6d9aecff6630,1\7\171fdb11b4f4e1c142681345aed30241fb7484f3
+Å
+Q.idea/sonarlint/securityhotspotstore/d/9/d90d1c1bde16683f2b2b58f75e58d5eb2e678d74,b\a\ba7f1189b3c9a1857709f4569e8cc5a74f6ff4c3
