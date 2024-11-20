@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Itrvb\Lab4\Repository;
 
-use Itrvb\Lab4\Repository\PostsRepositoryInterface;
+use Itrvb\Lab4\Exception\PostNotFoundException;
+use Itrvb\Lab4\Repository\Interfaces\PostsRepositoryInterface;
 use Itrvb\Lab4\Model\Post;
 use PDO;
+use Symfony\Component\Uid\Uuid;
 
 class PostsRepository implements PostsRepositoryInterface
 {
@@ -17,15 +21,22 @@ class PostsRepository implements PostsRepositoryInterface
 
     public function get(string $uuid): Post
     {
-        $sql = "SELECT * FROM posts WHERE `uuid` = '$uuid'";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $post = new Post();
-        $post->uuid = $data['uuid'];
-        $post->title = $data['title'];
-        $post->text = $data['text'];
-        $post->authorUuid = $data['authorUuid'];
+        $sql = "SELECT * FROM posts WHERE `uuid` = :uuid";
+        $prp = $this->db->prepare($sql);
 
-        return $post;
+        $prp->execute(['uuid' => $uuid]);
+        $result = $prp->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            throw new PostNotFoundException();
+        }
+
+        return new Post(
+            new Uuid($result['uuid']),
+            new Uuid($result['authorUuid']),
+            $result['title'],
+            $result['text']
+        );
     }
 
     public function save(Post $post): void

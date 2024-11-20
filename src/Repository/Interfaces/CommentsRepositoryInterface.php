@@ -1,6 +1,8 @@
 <?php
 
-namespace Itrvb\Lab4\Repository;
+declare(strict_types = 1);
+
+namespace Itrvb\Lab4\Repository\Interfaces;
 
 use Itrvb\Lab4\Model\Comment;
 

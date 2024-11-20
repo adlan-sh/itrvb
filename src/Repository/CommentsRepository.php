@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Itrvb\Lab4\Repository;
 
-use Itrvb\Lab4\Repository\CommentsRepositoryInterface;
+use Itrvb\Lab4\Exception\CommentNotFoundException;
 use Itrvb\Lab4\Model\Comment;
+use Itrvb\Lab4\Repository\Interfaces\CommentsRepositoryInterface;
 use PDO;
+use Symfony\Component\Uid\Uuid;
 
 class CommentsRepository implements CommentsRepositoryInterface
 {
@@ -17,15 +21,22 @@ class CommentsRepository implements CommentsRepositoryInterface
 
     public function get(string $uuid): Comment
     {
-        $sql = "SELECT * FROM comments WHERE `uuid` = '$uuid'";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $comment = new Comment();
-        $comment->uuid = $data['uuid'];
-        $comment->authorUuid = $data['authorUuid'];
-        $comment->text = $data['text'];
-        $comment->postUuid = $data['postUuid'];
+        $sql = "SELECT * FROM comments WHERE `uuid` = :uuid";
+        $prp = $this->db->prepare($sql);
 
-        return $comment;
+        $prp->execute(['uuid' => $uuid]);
+        $result = $prp->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            throw new CommentNotFoundException();
+        }
+
+        return new Comment(
+            new Uuid($result['uuid']),
+            new Uuid($result['authorUuid']),
+            new Uuid($result['postUuid']),
+            $result['text']
+        );
     }
 
     public function save(Comment $comment): void

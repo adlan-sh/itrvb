@@ -55,3 +55,26 @@ Q.idea/sonarlint/securityhotspotstore/1/7/1703566e41b1bc33bf5902edf604e5e503b6ee
 Q.idea/sonarlint/securityhotspotstore/1/4/145011be6edbb7cae8f267364260f56cabecf26d,4\a\4a6362c18cc82e0403924422132ae921b5d8c7fd
 Å
 Q.idea/sonarlint/securityhotspotstore/d/4/d4f69acbe61f8c37c042a4720b9f43fbd9dfaa85,0\4\048cddd03ba00e1789b74408b558cc847fa87037
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+U
+%src/Repository/CommentsRepository.php,a\4\a41ea812b08b98c2067b7e8dc356263c669cb0ca
+Z
+*src/Exception/CommentNotFoundException.php,d\e\dea08f18c4f68cf53b209e4f54e62ccce709b50e
+W
+'src/Exception/PostNotFoundException.php,1\7\1742ee156423e3a29b1303ae4f9a12a761ac69c3
+R
+"src/Commands/CreatePostCommand.php,2\4\24324f16019392fb0879d04f466bddcad0f7f6d3
+R
+"src/Exception/CommandException.php,b\a\ba75b15cfa963188a9ccf7da7b4458a2e1d8d9a2
+i
+9src/Repository/Interfaces/CommentsRepositoryInterface.php,1\d\1d3d8a7ade67d2f6e7f1a5aa5e817083f2be0ef6
+f
+6src/Repository/Interfaces/PostsRepositoryInterface.php,c\e\ce35cf02edc67d7fe08beb5bd9aaf45f6674b4b4
+L
+src/Queries/GetPostQuery.php,5\0\50642e26a1119dba16f5c8fb3737727f7b00cf2f
+U
+%src/Commands/CreateCommentCommand.php,f\c\fc3f86c79d7b81a3ef4af1817135b8662592218c
+O
+src/Queries/GetCommentQuery.php,f\7\f758ff647d3e828b563c52c8561a0223203267c3
