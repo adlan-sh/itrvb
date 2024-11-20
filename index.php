@@ -37,7 +37,7 @@ class Product
         return $this->description;
     }
 
-    public function setDescprition(string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -61,11 +61,11 @@ class Cart
 
     public function deleteItem(Product $item, int $count): self
     {
-        if (in_array($item) && $this->items[$item->getId()]['count'] >= $count) {
+        if (in_array($item, $this->items, true) && $this->items[$item->getId()]['count'] >= $count) {
             $this->items[$item->getId()]['count'] -= $count;
+        }
 
-            return $this;
-        } 
+        return $this;
     }
 }
 
@@ -164,7 +164,7 @@ class Form
     {
         $this->buttonText = $buttonText;
 
-        return self;
+        return $this;
     }
 }
 
@@ -176,10 +176,11 @@ class FeedbackForm extends Form
 
     private string $text;
 
-    public function __construct(User $user, int $scale, string $text)
+    public function __construct(string $title, User $user, int $score, string $text)
     {
+        parent::__construct($title);
         $this->user = $user;
-        $this->scale = $scale;
+        $this->score = $score;
         $this->text = $text;
     }
 
@@ -188,14 +189,14 @@ class FeedbackForm extends Form
         return $this->user;
     }
 
-    public function getScale(): int
+    public function getScore(): int
     {
-        return $this->scale;
+        return $this->score;
     }
 
-    public function setScale(int $scale): self
+    public function setScore(int $scale): self
     {
-        $this->scale = $scale;
+        $this->score = $scale;
 
         return $this;
     }
