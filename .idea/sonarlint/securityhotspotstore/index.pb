@@ -78,3 +78,7 @@ U
 %src/Commands/CreateCommentCommand.php,f\c\fc3f86c79d7b81a3ef4af1817135b8662592218c
 O
 src/Queries/GetCommentQuery.php,f\7\f758ff647d3e828b563c52c8561a0223203267c3
+P
+ tests/CommentsRepositoryTest.php,0\c\0c8010e4ee3dc7f49af4860b9e8e42b93877e5aa
+M
+tests/PostsRepositoryTest.php,e\f\efb8cec008e7a076043bf0658da6e517f949f411

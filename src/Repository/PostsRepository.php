@@ -9,6 +9,7 @@ use Itrvb\Lab4\Repository\Interfaces\PostsRepositoryInterface;
 use Itrvb\Lab4\Model\Post;
 use PDO;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 class PostsRepository implements PostsRepositoryInterface
 {
@@ -32,8 +33,8 @@ class PostsRepository implements PostsRepositoryInterface
         }
 
         return new Post(
-            new Uuid($result['uuid']),
-            new Uuid($result['authorUuid']),
+            new UuidV4($result['uuid']),
+            new UuidV4($result['authorUuid']),
             $result['title'],
             $result['text']
         );

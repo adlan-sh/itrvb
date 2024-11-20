@@ -9,6 +9,7 @@ use Itrvb\Lab4\Model\Comment;
 use Itrvb\Lab4\Repository\Interfaces\CommentsRepositoryInterface;
 use PDO;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 class CommentsRepository implements CommentsRepositoryInterface
 {
@@ -32,9 +33,9 @@ class CommentsRepository implements CommentsRepositoryInterface
         }
 
         return new Comment(
-            new Uuid($result['uuid']),
-            new Uuid($result['authorUuid']),
-            new Uuid($result['postUuid']),
+            new UuidV4($result['uuid']),
+            new UuidV4($result['authorUuid']),
+            new UuidV4($result['postUuid']),
             $result['text']
         );
     }
