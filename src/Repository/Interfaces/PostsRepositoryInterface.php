@@ -1,6 +1,8 @@
 <?php
 
-namespace Itrvb\Lab4\Repository;
+declare(strict_types = 1);
+
+namespace Itrvb\Lab4\Repository\Interfaces;
 
 use Faker\Core\Uuid;
 use Itrvb\Lab4\Model\Post;

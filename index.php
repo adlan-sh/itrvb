@@ -1,6 +1,6 @@
 <?php
 
-require './vendor/autoload.php';
+require_once './vendor/autoload.php';
 
 $db = new PDO('sqlite:' . __DIR__ . '/my_database.sqlite');
 
@@ -27,37 +27,24 @@ $db->exec("CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (postUuid) REFERENCES posts(uuid)
 );");
 
+use Itrvb\Lab4\Commands\CreateCommentCommand;
+use Itrvb\Lab4\Commands\CreatePostCommand;
+use Itrvb\Lab4\Queries\GetCommentQuery;
+use Itrvb\Lab4\Queries\GetPostQuery;
 use Itrvb\Lab4\Repository\PostsRepository;
 use Itrvb\Lab4\Repository\CommentsRepository;
-use Itrvb\Lab4\Model\Post;
-use Itrvb\Lab4\Model\Comment;
-
-$faker = Faker\Factory::create();
 
 $postsRepository = new PostsRepository($db);
 $commentsRepository = new CommentsRepository($db);
 
-$postUuid = $faker->uuid();
-$authorUuid = $faker->uuid();
-$commentUuid = $faker->uuid();
+$postCommand = new CreatePostCommand($postsRepository);
+$commentCommand = new CreateCommentCommand($commentsRepository);
 
-$post = new Post();
-$post->uuid = $postUuid;
-$post->authorUuid = $authorUuid;
-$post->title = 'Заголовок поста';
-$post->text = 'Текст поста';
+$postCommand->handle($argv);      // создание поста
+//$commentCommand->handle($argv); // создание комментария
 
-$postsRepository->save($post);
-$postDb = $postsRepository->get($postUuid);
-var_dump($postDb);
+$postQuery = new GetPostQuery($postsRepository);
+$commentQuery = new GetCommentQuery($commentsRepository);
 
-
-$comment = new Comment();
-$comment->uuid = $commentUuid;
-$comment->authorUuid = $authorUuid;
-$comment->postUuid = $postUuid;
-$comment->text = 'Текст комментария';
-
-$commentsRepository->save($comment);
-$commentDb = $commentsRepository->get($commentUuid);
-var_dump($commentDb);
+//var_dump($postQuery->handle($argv));      // получение поста
+//var_dump($commentQuery->handle($argv));   // получение комментария

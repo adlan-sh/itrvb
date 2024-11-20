@@ -3,49 +3,51 @@
 use Itrvb\Lab4\Exception\CommentNotFoundException;
 use Itrvb\Lab4\Model\Comment;
 use Itrvb\Lab4\Repository\CommentsRepository;
-use Itrvb\Lab4\Repository\CommentsRepositoryInterface;
+use Itrvb\Lab4\Repository\Interfaces\CommentsRepositoryInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Uid\Uuid;
 
 class CommentsRepositoryTest extends TestCase
 {
     private CommentsRepositoryInterface $commentsRepository;
 
-    private static string $uuid;
+    private static Uuid $uuid;
 
-    private static string $authorUuid;
+    private static Uuid $authorUuid;
 
-    private static string $postUuid;
+    private static Uuid $postUuid;
 
     public function setUp(): void
     {
         $pdo = new PDO('sqlite:' . './../my_database.sqlite');
         $this->commentsRepository = new CommentsRepository($pdo);
         if (!isset(self::$uuid)) {
-            $faker = Faker\Factory::create();
-            self::$uuid = $faker->uuid();
-            self::$authorUuid = $faker->uuid();
-            self::$postUuid = $faker->uuid();
+            self::$uuid = Uuid::v4();
+            self::$authorUuid = Uuid::v4();
+            self::$postUuid = Uuid::v4();
         }
     }
 
     public function test_saveComment(): void
     {
-        $comment = new Comment();
-        $comment->uuid = self::$uuid;
-        $comment->authorUuid = self::$authorUuid;
-        $comment->postUuid = self::$postUuid;
-        $comment->text = 'Test text';
+        $comment = new Comment(
+            self::$uuid,
+            self::$authorUuid,
+            self::$postUuid,
+            'Test text'
+        );
         $this->expectOutputRegex('/Comment was saved/');
         $this->commentsRepository->save($comment);
     }
 
     public function test_getComment(): void
     {
-        $comment = new Comment();
-        $comment->uuid = self::$uuid;
-        $comment->authorUuid = self::$authorUuid;
-        $comment->postUuid = self::$postUuid;
-        $comment->text = 'Test text';
+        $comment = new Comment(
+            self::$uuid,
+            self::$authorUuid,
+            self::$postUuid,
+            'Test text'
+        );
 
         $commentDb = $this->commentsRepository->get(self::$uuid);
 
