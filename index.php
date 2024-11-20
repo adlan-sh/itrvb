@@ -2,7 +2,7 @@
 
 abstract class Product
 {
-    private float $price;
+    protected float $price;
 
     public abstract function countPrice();
 }
