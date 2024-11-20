@@ -10,7 +10,7 @@ class Autoloader
         spl_autoload_register([$this, 'loadClass']);
     }
 
-    public function loadClass($className)
+    public function loadClass($className): void
     {
         $filePath = str_replace('\\', DIRECTORY_SEPARATOR, $className);
         $filePath = str_replace('_', DIRECTORY_SEPARATOR, $filePath);
@@ -19,7 +19,7 @@ class Autoloader
         $fullPath = $this->baseDir . $filePath;
 
         if (file_exists($fullPath)) {
-            require $fullPath;
+            require_once $fullPath;
         }
     }
 }
@@ -32,7 +32,7 @@ $user->firstName = 'Bob';
 echo $user->firstName;
 echo "\n";
 
-require './vendor/autoload.php';
+require_once './vendor/autoload.php';
 use Itrvb\Lab3\Post;
 
 $post = new Post();
