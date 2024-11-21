@@ -2,17 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Itrvb\Lab4\Commands;
+namespace Itrvb\Lab4\Commands\Post;
 
 use Itrvb\Lab4\Exception\CommandException;
-use Itrvb\Lab4\Model\Comment;
-use Itrvb\Lab4\Repository\Interfaces\CommentsRepositoryInterface;
+use Itrvb\Lab4\Model\Post;
+use Itrvb\Lab4\Repository\Interfaces\PostsRepositoryInterface;
 use Symfony\Component\Uid\Uuid;
 
-class CreateCommentCommand
+class CreatePostCommand
 {
     public function __construct(
-        private CommentsRepositoryInterface $commentsRepository
+        private PostsRepositoryInterface $postsRepository
     ) {
     }
 
@@ -20,10 +20,10 @@ class CreateCommentCommand
     {
         $input = $this->parseRawInput($rawInput);
 
-        $this->commentsRepository->save(new Comment(
+        $this->postsRepository->save(new Post(
             Uuid::v4(),
             new Uuid($input['authorUuid']),
-            new Uuid($input['postUuid']),
+            $input['title'],
             $input['text'],
         ));
     }
@@ -47,7 +47,7 @@ class CreateCommentCommand
             $input[$parts[0]] = $parts[1];
         }
 
-        foreach (['authorUuid', 'postUuid', 'text'] as $argument) {
+        foreach (['authorUuid', 'title', 'text'] as $argument) {
             if (!array_key_exists($argument, $input)) {
                 throw new CommandException('No required argument provided: ', $argument);
             }

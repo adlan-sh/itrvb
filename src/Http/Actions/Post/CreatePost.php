@@ -2,7 +2,7 @@
 
 namespace Itrvb\Lab4\Http\Actions\Post;
 
-use Itrvb\Lab4\Commands\CreatePostCommand;
+use Itrvb\Lab4\Commands\Post\CreatePostCommand;
 use Itrvb\Lab4\Exception\HttpException;
 use Itrvb\Lab4\Exception\InvalidUuidException;
 use Itrvb\Lab4\Http\Actions\ActionInterface;

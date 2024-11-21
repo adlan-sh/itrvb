@@ -2,37 +2,35 @@
 
 declare(strict_types = 1);
 
-namespace Itrvb\Lab4\Http\Actions\Post;
+namespace Itrvb\Lab4\Http\Actions\Like;
 
-use Itrvb\Lab4\Commands\Post\DeletePostCommand;
 use Itrvb\Lab4\Exception\HttpException;
 use Itrvb\Lab4\Http\Actions\ActionInterface;
 use Itrvb\Lab4\Http\ErrorResponse;
 use Itrvb\Lab4\Http\Request;
 use Itrvb\Lab4\Http\Response;
 use Itrvb\Lab4\Http\SuccessResponse;
+use Itrvb\Lab4\Queries\Like\GetLikesQuery;
 
-class DeletePost implements ActionInterface
+class GetLikes implements ActionInterface
 {
-    public function __construct(
-        private DeletePostCommand $command,
-    ) {
+    public function __construct(private GetLikesQuery $query)
+    {
     }
 
     public function handle(Request $request): Response
     {
         try {
-            $uuid = $request->query('uuid');
-
-            $this->command->handle([
-                'uuid' => $uuid,
+            $postUuid = $request->query('post_uuid');
+            $data = $this->query->handle([
+                'postUuid' => $postUuid,
             ]);
         } catch (HttpException $ex) {
             return new ErrorResponse($ex->getMessage());
         }
 
         return new SuccessResponse([
-            'message' => 'Post was deleted successfully',
+            'likes' => $data,
         ]);
     }
 }

@@ -2,27 +2,36 @@
 
 require_once './vendor/autoload.php';
 
-use Itrvb\Lab4\Commands\CreateCommentCommand;
-use Itrvb\Lab4\Commands\CreatePostCommand;
-use Itrvb\Lab4\Commands\DeletePostCommand;
+use Itrvb\Lab4\Commands\Comment\CreateCommentCommand;
+use Itrvb\Lab4\Commands\Like\CreateLikeCommand;
+use Itrvb\Lab4\Commands\Post\CreatePostCommand;
+use Itrvb\Lab4\Commands\Post\DeletePostCommand;
+use Itrvb\Lab4\Exception\HttpException;
 use Itrvb\Lab4\Http\Actions\Comment\CreateComment;
+use Itrvb\Lab4\Http\Actions\Like\CreateLike;
+use Itrvb\Lab4\Http\Actions\Like\GetLikes;
 use Itrvb\Lab4\Http\Actions\Post\CreatePost;
 use Itrvb\Lab4\Http\Actions\Post\DeletePost;
 use Itrvb\Lab4\Http\ErrorResponse;
 use Itrvb\Lab4\Http\Request;
+use Itrvb\Lab4\Queries\Like\GetLikesQuery;
 use Itrvb\Lab4\Repository\CommentsRepository;
+use Itrvb\Lab4\Repository\LikesRepository;
 use Itrvb\Lab4\Repository\PostsRepository;
-use Itrvb\Lab4\Exception\HttpException;
 use Itrvb\Lab4\Repository\UsersRepository;
 
 $db = new PDO('sqlite:' . __DIR__ . '/my_database.sqlite');
 $postsRepository = new PostsRepository($db);
 $commentsRepository = new CommentsRepository($db);
 $userRepository = new UsersRepository($db);
+$likesRepository = new LikesRepository($db);
 
 $postCommand = new CreatePostCommand($postsRepository);
 $postDeleteCommand = new DeletePostCommand($postsRepository);
 $commentCommand = new CreateCommentCommand($commentsRepository);
+$likeCommand = new CreateLikeCommand($likesRepository);
+
+$likeQuery = new GetLikesQuery($likesRepository);
 
 $content = json_decode(
     file_get_contents('php://input'),
@@ -45,6 +54,8 @@ $routes = [
     '/posts/comment' => new CreateComment($commentCommand),
     '/posts' => new CreatePost($postCommand, $userRepository),
     '/posts/delete' => new DeletePost($postDeleteCommand),
+    '/posts/like' => new CreateLike($likeCommand),
+    '/posts/likes' => new GetLikes($likeQuery)
 ];
 
 if (!array_key_exists($path, $routes)) {

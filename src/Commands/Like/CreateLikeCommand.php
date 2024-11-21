@@ -2,24 +2,34 @@
 
 declare(strict_types = 1);
 
-namespace Itrvb\Lab4\Queries;
+namespace Itrvb\Lab4\Commands\Like;
 
 use Itrvb\Lab4\Exception\CommandException;
-use Itrvb\Lab4\Model\Comment;
-use Itrvb\Lab4\Repository\Interfaces\CommentsRepositoryInterface;
+use Itrvb\Lab4\Exception\LikesAlreadyExistsException;
+use Itrvb\Lab4\Model\Like;
+use Itrvb\Lab4\Repository\Interfaces\LikesRepositoryInterface;
+use Symfony\Component\Uid\Uuid;
 
-class GetCommentQuery
+class CreateLikeCommand
 {
     public function __construct(
-        private CommentsRepositoryInterface $commentsRepository
+        private LikesRepositoryInterface $likesRepository
     ) {
     }
 
-    public function handle(array $rawInput): Comment
+    public function handle(array $rawInput): void
     {
         $input = $this->parseRawInput($rawInput);
 
-        return $this->commentsRepository->get($input['uuid']);
+        if ($this->likesRepository->isExists($input['postUuid'], $input['userUuid'])) {
+            throw new LikesAlreadyExistsException($input['postUuid']);
+        }
+
+        $this->likesRepository->save(new Like(
+            Uuid::v4(),
+            new Uuid($input['postUuid']),
+            new Uuid($input['userUuid']),
+        ));
     }
 
     public function parseRawInput(array $rawInput): array
@@ -41,7 +51,7 @@ class GetCommentQuery
             $input[$parts[0]] = $parts[1];
         }
 
-        foreach (['uuid'] as $argument) {
+        foreach (['postUuid', 'userUuid'] as $argument) {
             if (!array_key_exists($argument, $input)) {
                 throw new CommandException('No required argument provided: ', $argument);
             }

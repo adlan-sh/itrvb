@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Itrvb\Lab4\Http\Actions\Comment;
 
-use Itrvb\Lab4\Commands\CreateCommentCommand;
+use Itrvb\Lab4\Commands\Comment\CreateCommentCommand;
 use Itrvb\Lab4\Exception\HttpException;
 use Itrvb\Lab4\Http\Actions\ActionInterface;
 use Itrvb\Lab4\Http\ErrorResponse;

@@ -27,12 +27,18 @@ $db->exec("CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (postUuid) REFERENCES posts(uuid)
 );");
 
-use Itrvb\Lab4\Commands\CreateCommentCommand;
-use Itrvb\Lab4\Commands\CreatePostCommand;
-use Itrvb\Lab4\Queries\GetCommentQuery;
-use Itrvb\Lab4\Queries\GetPostQuery;
-use Itrvb\Lab4\Repository\PostsRepository;
+$db->exec("CREATE TABLE IF NOT EXISTS likes (
+    uuid TEXT PRIMARY KEY,
+    postUuid TEXT NOT NULL,
+    userUuid TEXT NOT NULL
+);");
+
+use Itrvb\Lab4\Commands\Comment\CreateCommentCommand;
+use Itrvb\Lab4\Commands\Post\CreatePostCommand;
+use Itrvb\Lab4\Queries\Comment\GetCommentQuery;
+use Itrvb\Lab4\Queries\Post\GetPostQuery;
 use Itrvb\Lab4\Repository\CommentsRepository;
+use Itrvb\Lab4\Repository\PostsRepository;
 
 $postsRepository = new PostsRepository($db);
 $commentsRepository = new CommentsRepository($db);

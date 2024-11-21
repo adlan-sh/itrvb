@@ -2,7 +2,7 @@
 
 namespace Http;
 
-use Itrvb\Lab4\Commands\CreatePostCommand;
+use Itrvb\Lab4\Commands\Post\CreatePostCommand;
 use Itrvb\Lab4\Exception\InvalidUuidException;
 use Itrvb\Lab4\Exception\UserNotFoundException;
 use Itrvb\Lab4\Http\Actions\Post\CreatePost;

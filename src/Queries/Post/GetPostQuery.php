@@ -2,23 +2,24 @@
 
 declare(strict_types = 1);
 
-namespace Itrvb\Lab4\Commands;
+namespace Itrvb\Lab4\Queries\Post;
 
 use Itrvb\Lab4\Exception\CommandException;
+use Itrvb\Lab4\Model\Post;
 use Itrvb\Lab4\Repository\Interfaces\PostsRepositoryInterface;
 
-class DeletePostCommand
+class GetPostQuery
 {
     public function __construct(
         private PostsRepositoryInterface $postsRepository
     ) {
     }
 
-    public function handle(array $rawInput): void
+    public function handle(array $rawInput): Post
     {
         $input = $this->parseRawInput($rawInput);
 
-        $this->postsRepository->delete($input['uuid']);
+        return $this->postsRepository->get($input['uuid']);
     }
 
     public function parseRawInput(array $rawInput): array
