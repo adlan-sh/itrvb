@@ -19,7 +19,7 @@ class CommentsRepositoryTest extends TestCase
 
     public function setUp(): void
     {
-        $pdo = new PDO('sqlite:' . './../my_database.sqlite');
+        $pdo = new PDO('sqlite:' . './../../my_database.sqlite');
         $this->commentsRepository = new CommentsRepository($pdo);
         if (!isset(self::$uuid)) {
             self::$uuid = Uuid::v4();

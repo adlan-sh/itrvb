@@ -19,7 +19,7 @@ class PostsRepositoryTest extends TestCase
 
     public function setUp(): void
     {
-        $pdo = new PDO('sqlite:' . './../my_database.sqlite');
+        $pdo = new PDO('sqlite:' . './../../my_database.sqlite');
         $this->postsRepository = new PostsRepository($pdo);
         if (!isset(self::$uuid)) {
             self::$uuid = Uuid::v4();
@@ -35,8 +35,7 @@ class PostsRepositoryTest extends TestCase
             'Test title',
             'Test text'
         );
-        $this->expectOutputRegex('/Post was saved/');
-        $this->postsRepository->save($post);
+        $this->assertTrue($this->postsRepository->save($post));
     }
 
     public function test_getPost(): void

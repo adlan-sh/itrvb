@@ -11,5 +11,7 @@ interface PostsRepositoryInterface
 {
     public function get(string $uuid): Post;
 
-    public function save(Post $post): void;
+    public function save(Post $post): bool;
+
+    public function delete(string $uuid): bool;
 }
