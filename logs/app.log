@@ -1,0 +1,6 @@
+[2024-11-25T04:55:46.687381+00:00] my_logger.INFO: Comment was created with uuid: 8a3b2ed1-7479-4358-a8c5-869159a6ae9f [] []
+[2024-11-25T04:57:00.058028+00:00] my_logger.INFO: Post was created with uuid: cb7e3c71-a5ac-4ced-8387-461b4c3bf62d [] []
+[2024-11-25T05:00:04.873086+00:00] my_logger.INFO: Post was created with uuid: edb3e4ac-1d05-4060-aca8-567588819b78 [] []
+[2024-11-25T05:02:22.834811+00:00] my_logger.WARNING: User not found {"uuid":"a39b7752-c916-4279-b318-d575d0c17bba"} []
+[2024-11-25T05:02:34.323754+00:00] my_logger.WARNING: User not found {"uuid":"a39b7752-c916-4279-b318-d575d0c17bba"} []
+[2024-11-25T05:02:46.716937+00:00] my_logger.INFO: Post was created with uuid: 1755d704-0ae2-4695-9afd-57ae8fdbf4e4 [] []

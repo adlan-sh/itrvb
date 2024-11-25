@@ -7,14 +7,12 @@ namespace Itrvb\Lab4\Repository;
 use Itrvb\Lab4\Model\Like;
 use Itrvb\Lab4\Repository\Interfaces\LikesRepositoryInterface;
 use PDO;
+use Psr\Log\LoggerInterface;
 
 class LikesRepository implements LikesRepositoryInterface
 {
-    private PDO $db;
-
-    public function __construct(PDO $db)
+    public function __construct(private PDO $db, private LoggerInterface $logger)
     {
-        $this->db = $db;
     }
 
     public function save(Like $like): void
@@ -26,7 +24,10 @@ class LikesRepository implements LikesRepositoryInterface
             'postUuid' => $like->postUuid,
             'userUuid' => $like->userUuid
         ];
-        $prp->execute($params);
+
+        if($prp->execute($params)) {
+            $this->logger->info('Like was created with uuid: ' . $like->uuid);
+        }
     }
 
     public function getByPostUuid(string $uuid): array

@@ -19,12 +19,15 @@ use Itrvb\Lab4\Repository\CommentsRepository;
 use Itrvb\Lab4\Repository\LikesRepository;
 use Itrvb\Lab4\Repository\PostsRepository;
 use Itrvb\Lab4\Repository\UsersRepository;
+use Monolog\Handler\StreamHandler;
 
 $db = new PDO('sqlite:' . __DIR__ . '/my_database.sqlite');
-$postsRepository = new PostsRepository($db);
-$commentsRepository = new CommentsRepository($db);
-$userRepository = new UsersRepository($db);
-$likesRepository = new LikesRepository($db);
+$logger = new Monolog\Logger('my_logger', [new StreamHandler('./logs/app.log')]);
+
+$postsRepository = new PostsRepository($db, $logger);
+$commentsRepository = new CommentsRepository($db, $logger);
+$userRepository = new UsersRepository($db, $logger);
+$likesRepository = new LikesRepository($db, $logger);
 
 $postCommand = new CreatePostCommand($postsRepository);
 $postDeleteCommand = new DeletePostCommand($postsRepository);

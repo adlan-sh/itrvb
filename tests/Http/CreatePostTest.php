@@ -12,8 +12,11 @@ use Itrvb\Lab4\Repository\Interfaces\PostsRepositoryInterface;
 use Itrvb\Lab4\Repository\Interfaces\UsersRepositoryInterface;
 use Itrvb\Lab4\Repository\PostsRepository;
 use Itrvb\Lab4\Repository\UsersRepository;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use PDO;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Uid\Uuid;
 
 class CreatePostTest extends TestCase
@@ -24,12 +27,15 @@ class CreatePostTest extends TestCase
 
     private static PostsRepositoryInterface $postsRepository;
 
+    private static LoggerInterface $logger;
+
     protected function setUp(): void
     {
         self::$authorUuid = Uuid::v4();
         $pdo = new PDO('sqlite:' . './../../my_database.sqlite');
-        self::$postsRepository = new PostsRepository($pdo);
-        self::$usersRepository = new UsersRepository($pdo);
+        self::$logger = new Logger('my_logger_test', [new StreamHandler(__DIR__ . '/../../logs/test.log')]);
+        self::$postsRepository = new PostsRepository($pdo, self::$logger);
+        self::$usersRepository = new UsersRepository($pdo, self::$logger);
         self::$usersRepository->save(
             new User(self::$authorUuid, 'test name', 'test surname')
         );
